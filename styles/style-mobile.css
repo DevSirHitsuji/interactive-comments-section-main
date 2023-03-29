@@ -1,0 +1,163 @@
+
+body {
+    background-color: hsl(228, 33%, 97%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 95%; 
+}
+
+.comment {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px;
+
+    background-color: rgb(255, 255, 255);
+    
+}
+
+.comment > div {
+    margin: 10px;
+}
+
+.comment-replies {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.replies {
+    border-left: solid 2px blue;
+    background-color: hsl(228, 33%, 97%);
+    width: 95%;
+    align-self: end;
+}
+
+.user-infos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user > p {
+    margin: 5px;
+}
+
+.user .indicator {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(27, 27, 124);
+    color: white;
+}
+
+.user .time {
+    opacity: 0.7;
+}
+
+.user img {
+    width: 40px;
+    margin: 0px;
+}
+
+.reply {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.reply p {
+    color: rgb(27, 27, 124);
+    margin-left: 5px;
+}
+
+.r-desktop {
+    display: none;
+}
+
+.content {
+    margin: 5px;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    background-color: hsl(228, 33%, 97%);
+    width: min-content;
+    border-radius: 5px;
+}
+
+.likes > * {
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    padding: 3px;
+    padding-block: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.likes p {
+    color: hsl(239, 51%, 64%);
+}
+
+.likes button {
+    color: hsl(239, 57%, 85%);
+    font-size: 1.5vh;
+}
+
+.mobile-likes-reply {
+    display: flex;
+    justify-content: space-between;
+}
+
+.send-comment {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.send-comment textarea {
+    height: 10vh;
+    border: none;
+    box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.092);
+    border-radius: 10px;
+    font-size: 2vh;
+}
+
+.send-comment div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.send-comment div img {
+    width: 10%;
+}
+
+.send-comment div button {
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    background-color: rgb(58, 58, 146);
+    font-size: 2vh;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: white;
+}

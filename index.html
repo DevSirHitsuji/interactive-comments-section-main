@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive comments section</title>
+
+  <link rel="stylesheet" type="text/css" href="./styles/reset.css">
+
+  <link rel="stylesheet" type="text/css" href="./styles/style-mobile.css">
+
+  <script src="./script.js" defer></script>
+
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  
+  <div id="comments" class="comments your">
+    <div class="comment">
+      <div class="mobile-likes-reply">
+        <div class="likes">
+            <button id="btn-more">+</button>
+            <p id="like">0</p>
+            <button id="btn-less">-</button>
+        </div>
+
+        <div class="reply r-mobile">
+          <img src="./images/icon-reply.svg" alt="reply icon">
+          <p>Reply</p>
+        </div>
+
+      </div>
+      
+      <div>
+        <div class="user-infos">
+          <div class="user">
+            <img class="photo" src="./images/avatars/image-juliusomo.png" alt="">
+            <p class="username">juliosomo</p>
+            <p class="indicator">you</p>
+            <p class="time">1 mes atras</p>
+          </div>
+          <div class="reply r-desktop">
+            <img src="./images/icon-reply.svg" alt="reply icon">
+            <p>Reply</p>
+          </div>
+        </div>
+
+        <div class="content">
+          <p>ola achei muito legal esse video ai parabens aachie mauito legal esse vieo ai oh, agora ue vou dar meu like e voltar no proximo video, parabens, muito legal esse video ai oh</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="send-comment">
+    <textarea class="input-comment" name="text-write" rows="14" cols="10" wrap="soft"></textarea>
+    <div>
+      <img src="./images/avatars/image-juliusomo.png" alt="your photo .png">
+      <button class="send">send</button>
+    </div>
+    
+  </div>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Gustavo Silva</a>.
+  </div>
+</body>
+</html>
