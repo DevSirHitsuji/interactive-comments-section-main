@@ -54,6 +54,73 @@ function createComment(comment, currentUser) {
     let time = CE("div", "time", "class", comment.createdAt);
     [userImg, username, indicator, time].map((ele) => {user.appendChild(ele)});
 
+
+    let custom = CE("div", "custom c-mobile");
+
+    let Delete = CE("button", "delete");
+    Delete.style = "display: flex"
+
+    Delete.addEventListener("click", () => {
+        document.querySelector(`#${comment.user.username}`).remove();
+    })
+    
+    let DelIcon =  CE("img", "delImg")
+    DelIcon.src = "./images/icon-delete.svg";
+    let DelText = CE("p", "DelText", "class", "Delete");
+    [DelIcon, DelText].map((ele) => {Delete.appendChild(ele)});
+
+
+    let Edit = CE("button", "edit");
+    Edit.style = "display: flex"
+
+    Edit.addEventListener("click", () => {
+        let box = document.querySelector(`#${comment.user.username} .content`);
+        let editBtn = document.querySelector(`#${comment.user.username} .edit`);
+        let saveBtn = document.querySelector(`#${comment.user.username} .save`);
+
+        editBtn.style = "display: none"
+        saveBtn.style = "display: flex"
+        
+        let text = document.querySelector(`#${comment.user.username} .content-text`).innerHTML;
+        document.querySelector(`#${comment.user.username} .content-text`).remove();
+        let textArea = CE("textarea", "text-edit", "class", text);
+        box.appendChild(textArea);
+
+    })
+
+    let EditIcon =  CE("img", "EditImg");
+    EditIcon.src = "./images/icon-edit.svg";
+    let EditText = CE("p", "EditText", "class", "Edit");
+    [EditIcon, EditText].map((ele) => {Edit.appendChild(ele)});
+
+
+    let Save = CE("button", "save");
+    Save.style = "display: none";
+    Save.type = "submit";
+    
+    Save.addEventListener("click", () => {
+        let box = document.querySelector(`#${comment.user.username} .content`);
+        let editBtn = document.querySelector(`#${comment.user.username} .edit`);
+        let saveBtn = document.querySelector(`#${comment.user.username} .save`);
+
+        // editBtn.style = "display: flex"
+        // saveBtn.style = "display: none"
+
+        // let text = document.querySelector(`#${comment.user.username} .text-edit`).innerHTML;
+        // document.querySelector(`#${comment.user.username} .text-edit`).remove();
+        // let textP = CE("p", "content-text", "class", text)
+        // box.appendChild(textP);
+
+    })
+
+    let saveText = CE("p", "save-text", "class", "Save")
+    Save.appendChild(saveText);
+
+
+    [Delete, Edit, Save].map((ele) => {custom.appendChild(ele)})
+
+
+
     let reply = CE("div", "reply r-mobile") ;
 
     reply.addEventListener("click", () => {
@@ -67,10 +134,14 @@ function createComment(comment, currentUser) {
     [replyIcon, replyText].map((ele) => {reply.appendChild(ele)});
 
     [user, reply].map((ele) => {userInfos.appendChild(ele)});
-
     reply.className = "reply r-mobile";
-    [Likes, reply].map((ele) => {likesReply.appendChild(ele)})
     
+    
+    if (comment.user.username == currentUser.username) {
+        [Likes, custom].map((ele) => {likesReply.appendChild(ele)})
+    } else {
+        [Likes, reply].map((ele) => {likesReply.appendChild(ele)})
+    }
 
     let div = CE("div", "none")
     let content = CE("div", "content")
@@ -89,6 +160,7 @@ function createComment(comment, currentUser) {
 
     return commentAndReplies;
 }
+
 
 
 fetch("./data.json")
