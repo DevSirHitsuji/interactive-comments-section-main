@@ -96,20 +96,20 @@ function createComment(comment, currentUser) {
 
     let Save = CE("button", "save");
     Save.style = "display: none";
-    Save.type = "submit";
+
     
     Save.addEventListener("click", () => {
         let box = document.querySelector(`#${comment.user.username} .content`);
         let editBtn = document.querySelector(`#${comment.user.username} .edit`);
         let saveBtn = document.querySelector(`#${comment.user.username} .save`);
 
-        // editBtn.style = "display: flex"
-        // saveBtn.style = "display: none"
+        editBtn.style = "display: flex"
+        saveBtn.style = "display: none"
 
-        // let text = document.querySelector(`#${comment.user.username} .text-edit`).innerHTML;
-        // document.querySelector(`#${comment.user.username} .text-edit`).remove();
-        // let textP = CE("p", "content-text", "class", text)
-        // box.appendChild(textP);
+        let text = document.querySelector(`#${comment.user.username} .text-edit`).value;
+        document.querySelector(`#${comment.user.username} .text-edit`).remove();
+        let textP = CE("p", "content-text", "class", text)
+        box.appendChild(textP);
 
     })
 
@@ -121,7 +121,7 @@ function createComment(comment, currentUser) {
 
 
 
-    let reply = CE("div", "reply r-mobile") ;
+    let reply = CE("div", "reply r-desktop");
 
     reply.addEventListener("click", () => {
         console.log("oi")
@@ -134,12 +134,14 @@ function createComment(comment, currentUser) {
     [replyIcon, replyText].map((ele) => {reply.appendChild(ele)});
 
     [user, reply].map((ele) => {userInfos.appendChild(ele)});
-    reply.className = "reply r-mobile";
+
+    
     
     
     if (comment.user.username == currentUser.username) {
         [Likes, custom].map((ele) => {likesReply.appendChild(ele)})
     } else {
+        reply.className = "reply r-mobile";
         [Likes, reply].map((ele) => {likesReply.appendChild(ele)})
     }
 
@@ -161,6 +163,32 @@ function createComment(comment, currentUser) {
     return commentAndReplies;
 }
 
+
+function createObjectComment() {
+    fetch("./data.json")
+    .then(res => res.json())
+    .then(data => {
+        let currentUser = data.currentUser
+        let obj = {
+            "id": 1,
+            "content": document.getElementById("text-write").value,
+            "createdAt": "just now",
+            "score": 1,
+            "user": {
+                "image": { 
+                    "png": currentUser.image.png,
+                    "webp": currentUser.image.webp
+                },
+                "username": currentUser.username
+            },
+            "replies": []
+        }
+        document.getElementById("text-write").value = ""
+        let divComments = document.getElementById("comments");
+        divComments.appendChild(createComment(obj, currentUser))
+        
+    })
+}
 
 
 fetch("./data.json")
