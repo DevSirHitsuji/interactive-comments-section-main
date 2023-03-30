@@ -23,60 +23,13 @@
 
   
   <div id="comments" class="comments your">
-    <div class="comment">
-      <div class="mobile-likes-reply">
-        <div class="likes">
-            <button id="btn-more">+</button>
-            <p id="like">0</p>
-            <button id="btn-less">-</button>
-        </div>
 
-        <div class="custom c-mobile">
-          <div class="delete">
-            <img src="./images/icon-delete.svg">
-            <p>Delete</p>
-          </div>
-          <div class="edit">
-            <img src="./images/icon-edit.svg" alt="">
-            <p>Edit</p>
-          </div>
-        </div>
-
-      </div>
-      
-      <div>
-        <div class="user-infos">
-          <div class="user">
-            <img class="photo" src="./images/avatars/image-juliusomo.png" alt="">
-            <p class="username">juliosomo</p>
-            <p class="indicator">you</p>
-            <p class="time">1 mes atras</p>
-          </div>
-          <div class="custom c-desktop">
-            <div class="delete">
-              <img src="./images/icon-delete.svg" alt="" srcset="">
-              <p>Delete</p>
-            </div>
-            <div class="edit">
-              <img src="./images/icon-edit.svg" alt="">
-              <p>Edit</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="content">
-          <p>hey, this sistem yet no is 100%, but is nice hehe
-            
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
   
   <div class="send-comment">
     <textarea class="input-comment" name="text-write" id="text-write" rows="14" cols="10" wrap="soft"></textarea>
     <div>
-      <img src="./images/avatars/image-juliusomo.png" alt="your photo .png">
+      <img id="send-comment-avatar" src="./images/avatars/image-juliusomo.png" alt="your photo .png">
       <button class="send" onclick="
         createObjectComment();
         
