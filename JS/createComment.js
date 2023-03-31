@@ -1,14 +1,3 @@
-function CE(Name, nameClass, type, insert) {
-    let element = document.createElement(Name);
-    type == "id" ? element.id = nameClass : element.className = nameClass;
-    
-    if (insert) {
-        element.innerHTML = insert
-    }
-    return element;
-}
-
-
 function createComment(comment, currentUser) {
     let thisId = comment.user.username + "-" + Date.now();
     let commentAndReplies = CE("div", "comment-replies")
@@ -23,7 +12,6 @@ function createComment(comment, currentUser) {
 
 
     let Likes = CE("div", "likes");
-
 
     let btnMore = CE("button", "btn-more");
     let btnMoreIcon = CE("img", "btn-more-icon")
@@ -50,7 +38,7 @@ function createComment(comment, currentUser) {
 
     let likeNum = CE("p", "like", "id", comment.score);
 
-    [btnMore, likeNum, btnLess].map(async (ele) => {await Likes.appendChild(ele)});
+    [btnMore, likeNum, btnLess].map((ele) => {Likes.appendChild(ele)});
 
 
     let userInfos = CE("div", "user-infos");
@@ -71,7 +59,12 @@ function createComment(comment, currentUser) {
     Delete.style = "display: flex"
 
     Delete.addEventListener("click", () => {
-        document.querySelector(`#${thisId}`).remove();
+        let result = confirm("Delete this comment?")
+
+        if (result) {
+            document.querySelector(`#${thisId}`).remove();
+        }
+        
     })
     
     let DelIcon =  CE("img", "delImg")
@@ -94,7 +87,8 @@ function createComment(comment, currentUser) {
         let text = document.querySelector(`#${thisId} .content-text`).innerHTML;
         document.querySelector(`#${thisId} .content-text`).remove();
         let textArea = CE("textarea", "text-edit", "class", text);
-        textArea.autofocus = "enable"
+        textArea.placeholder = "Write your comment here..."
+        textArea.setAttribute("autofocus" , "enable")
         box.appendChild(textArea);
 
     })
@@ -114,13 +108,20 @@ function createComment(comment, currentUser) {
         let editBtn = document.querySelector(`#${thisId} .edit`);
         let saveBtn = document.querySelector(`#${thisId} .save`);
 
-        editBtn.style = "display: flex"
-        saveBtn.style = "display: none"
-
         let text = document.querySelector(`#${thisId} .text-edit`).value;
-        document.querySelector(`#${thisId} .text-edit`).remove();
-        let textP = CE("p", "content-text", "class", text)
-        box.appendChild(textP);
+
+        if (text.trim().length) {
+            editBtn.style = "display: flex"
+            saveBtn.style = "display: none"
+            document.querySelector(`#${thisId} .text-edit`).remove();
+            document.querySelector(`#${thisId} .error`).style = "display: none"
+            let textP = CE("p", "content-text", "class", text)
+            box.appendChild(textP);
+        } else {
+            document.querySelector(`#${thisId} .text-edit`).value = "";
+            document.querySelector(`#${thisId} .error`).style = "display: block"
+        }
+
 
     })
 
@@ -144,22 +145,41 @@ function createComment(comment, currentUser) {
 
     [replyIcon, replyText].map((ele) => {reply.appendChild(ele)});
 
-    [user, reply].map((ele) => {userInfos.appendChild(ele)});
+    if (comment.user.username == currentUser.username) {
+        [user].map((ele) => {userInfos.appendChild(ele)});
+    } else {
+        [user, reply].map((ele) => {userInfos.appendChild(ele)});
+    }
+    
 
     
     
     if (comment.user.username == currentUser.username) {
         [Likes, custom].map((ele) => {likesReply.appendChild(ele)})
+
     } else {
-        reply.className = "reply r-mobile";
-        [Likes, reply].map((ele) => {likesReply.appendChild(ele)})
+
+        let replyMoba = CE("div", "reply r-mobile");
+        replyMoba.addEventListener("click", () => {
+            replyComment(document.querySelector(`#${thisId}-replies .replies`))
+        })
+
+        let replyMobaIcon = CE("img", "reply-icon");
+        replyMobaIcon.src = "./images/icon-reply.svg"
+        let replyMobaText = CE("p", "reply-text", "class", "Reply");
+    
+        [replyMobaIcon, replyMobaText].map((ele) => {replyMoba.appendChild(ele)});
+        [Likes, replyMoba].map((ele) => {likesReply.appendChild(ele)})
     }
 
     let div = CE("div", "none")
     let content = CE("div", "content")
     let contentText = CE("p", "content-text", "class", comment.content);
     content.appendChild(contentText);
-
+    let alertError = CE("p", "error", "class", "You don't write nothing!");
+    alertError.style = "display: none;"
+    content.appendChild(alertError);
+    
     [userInfos, content].map((ele) => {div.appendChild(ele)});
     [likesReply, div].map((ele) => {Comment.appendChild(ele)});
     commentAndReplies.appendChild(Comment);
@@ -172,74 +192,3 @@ function createComment(comment, currentUser) {
 
     return commentAndReplies;
 }
-
-
-function createObjectComment() {
-    fetch("./data.json")
-    .then(res => res.json())
-    .then(data => {
-        let currentUser = data.currentUser
-        let obj = {
-            "id": 1,
-            "content": document.getElementById("text-write").value,
-            "createdAt": "just now",
-            "score": "0",
-            "user": {
-                "image": { 
-                    "png": currentUser.image.png,
-                    "webp": currentUser.image.webp
-                },
-                "username": currentUser.username
-            },
-            "replies": []
-        }
-        document.getElementById("text-write").value = ""
-        let divComments = document.getElementById("comments");
-        divComments.appendChild(createComment(obj, currentUser))
-
-    })
-}
-
-function replyComment(divCommentsReplies) {
-    fetch("./data.json")
-    .then(res => res.json())
-    .then(data => {
-        let currentUser = data.currentUser
-        let obj = {
-            "id": Date.now,
-            "content": "",
-            "createdAt": "just now",
-            "score": "0",
-            "user": {
-                "image": { 
-                    "png": currentUser.image.png,
-                    "webp": currentUser.image.webp
-                },
-                "username": currentUser.username
-            },
-            "replies": []
-        }
-        let comentario = createComment(obj, currentUser);
-        divCommentsReplies.appendChild(comentario);
-
-        let what = document.querySelector(`#${comentario.id} .edit`);
-        what.click()
-      
-    })
-}
-
-
-fetch("./data.json")
-.then(res => res.json())
-.then(data => {
-    
-    let comments = data.comments;
-    let currentUser = data.currentUser;
-    document.getElementById("send-comment-avatar").src = currentUser.image.png;
-    comments.map((ele) => {
-        let divComments = document.getElementById("comments");
-        divComments.appendChild(createComment(ele, currentUser))
-    })
-
-
-})

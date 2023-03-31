@@ -24,7 +24,7 @@
             "id": 3,
             "content": "Speak peixe, bola and gato for me, please!!",
             "createdAt": "3 week ago",
-            "score": 9999,
+            "score": 10,
             "replyingTo": "maxblagun",
             "user": {
               "image": { 
@@ -53,7 +53,7 @@
           "id": 3,
           "content": "Hum, achei facil.",
           "createdAt": "1 week ago",
-          "score": 1120,
+          "score": 7,
           "replyingTo": "maxblagun",
           "user": {
             "image": { 
@@ -67,7 +67,7 @@
           "id": 4,
           "content": "Como assim @EOSiR, levei mais de 3 semanas só pra fazer o html",
           "createdAt": "2 days ago",
-          "score": -10,
+          "score": 2,
           "replyingTo": "ramsesmiron",
           "user": {
             "image": { 

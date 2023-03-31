@@ -1,0 +1,30 @@
+@media (min-width: 768px) {
+    .comment {        
+        flex-direction: row;
+    }
+
+    .none {
+        width: 100%
+    }
+
+
+    .reply {
+        display: none;
+    }
+
+    .r-desktop {
+        display: flex;
+        justify-self: flex-end;
+    }
+
+    .likes {
+        flex-direction: column;
+    }
+
+    .custom {
+        position: absolute;
+        margin-left: 380px;
+        margin-bottom: 40%;
+    }
+
+}

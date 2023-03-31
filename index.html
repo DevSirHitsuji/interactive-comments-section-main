@@ -11,8 +11,13 @@
   <link rel="stylesheet" type="text/css" href="./styles/reset.css">
 
   <link rel="stylesheet" type="text/css" href="./styles/style-mobile.css">
+  <link rel="stylesheet" type="text/css" href="./styles/style-desktop.css">
 
-  <script src="./script.js" defer></script>
+  <script src="./JS/createElement.js"></script>
+  <script src="./JS/createComment.js"></script>
+  <script src="./JS/createObjectComment.js"></script>
+  <script src="./JS/replyComment.js"></script>
+  <script src="./JS/script.js" defer></script>
 
   <style>
     .attribution { font-size: 11px; text-align: center; }
@@ -27,7 +32,7 @@
   </div>
   
   <div class="send-comment">
-    <textarea class="input-comment" name="text-write" id="text-write" rows="14" cols="10" wrap="soft"></textarea>
+    <textarea class="input-comment" placeholder="Add the comment" name="text-write" id="text-write" rows="14" cols="10" wrap="soft"></textarea>
     <div>
       <img id="send-comment-avatar" src="./images/avatars/image-juliusomo.png" alt="your photo .png">
       <button class="send" onclick="
